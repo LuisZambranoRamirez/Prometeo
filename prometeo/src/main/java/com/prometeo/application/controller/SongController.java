@@ -18,7 +18,12 @@ public class SongController {
 
     @GetMapping
     public List<Song> getSongs() {
-        return songService.findAll();
+        System.out.println("[GET] /api/songs - Consultando todas las canciones (máximo 100)");
+
+        return songService.findAll()
+                .stream()
+                .limit(100)
+                .toList();
     }
 
     @GetMapping("/{artist}/{songName}")
@@ -26,11 +31,16 @@ public class SongController {
             @PathVariable String artist,
             @PathVariable String songName
     ) {
+        System.out.println("[GET] /api/songs/" + artist + "/" + songName
+                + " - Buscando canción");
+
         return songService.findById(songName, artist);
     }
 
     @PostMapping
     public Song createSong(@RequestBody Song song) {
+        System.out.println("[POST] /api/songs - Creando canción: " + song);
+
         return songService.save(song);
     }
 
@@ -39,6 +49,9 @@ public class SongController {
             @PathVariable String artist,
             @PathVariable String songName
     ) {
+        System.out.println("[DELETE] /api/songs/" + artist + "/" + songName
+                + " - Eliminando canción");
+
         songService.delete(songName, artist);
     }
 
@@ -47,6 +60,11 @@ public class SongController {
             @RequestParam String artist,
             @RequestParam String songName
     ) {
+        System.out.println("[GET] /api/songs/similar"
+                + " - Buscando canciones similares"
+                + " | Artista: " + artist
+                + " | Canción: " + songName);
+
         List<SongService.SimilarSongDTO> songs =
                 songService.findSimilarSongs(songName, artist);
 
@@ -56,9 +74,11 @@ public class SongController {
                 .limit(maxSize)
                 .forEach(System.out::println);
 
+        System.out.println("[GET] /api/songs/similar"
+                + " - Resultados encontrados: " + songs.size());
+
         return songs.stream()
                 .limit(maxSize)
                 .toList();
     }
-
 }

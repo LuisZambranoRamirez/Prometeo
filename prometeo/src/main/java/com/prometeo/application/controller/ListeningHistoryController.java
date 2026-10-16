@@ -20,6 +20,8 @@ public class ListeningHistoryController {
 
     @GetMapping
     public List<ListeningHistory> getHistory() {
+        System.out.println("[GET] /api/listening-history - Consultando todo el historial");
+
         return listeningHistoryService.findAll();
     }
 
@@ -27,6 +29,9 @@ public class ListeningHistoryController {
     public ListeningHistory getHistoryById(
             @PathVariable Long id
     ) {
+        System.out.println("[GET] /api/listening-history/" + id
+                + " - Consultando historial por ID");
+
         return listeningHistoryService.findById(id);
     }
 
@@ -34,6 +39,9 @@ public class ListeningHistoryController {
     public List<ListeningHistory> getUserHistory(
             @PathVariable String username
     ) {
+        System.out.println("[GET] /api/listening-history/user/" + username
+                + " - Consultando historial del usuario");
+
         return listeningHistoryService.findByUsername(username);
     }
 
@@ -42,6 +50,10 @@ public class ListeningHistoryController {
             @PathVariable String artist,
             @PathVariable String songName
     ) {
+        System.out.println("[GET] /api/listening-history/song/"
+                + artist + "/" + songName
+                + " - Consultando historial de la canción");
+
         return listeningHistoryService.findBySong(
                 songName,
                 artist
@@ -52,6 +64,9 @@ public class ListeningHistoryController {
     public ListeningHistory createHistory(
             @RequestBody ListeningHistory history
     ) {
+        System.out.println("[POST] /api/listening-history"
+                + " - Creando registro de historial: " + history);
+
         return listeningHistoryService.save(history);
     }
 
@@ -59,6 +74,9 @@ public class ListeningHistoryController {
     public void deleteHistory(
             @PathVariable Long id
     ) {
+        System.out.println("[DELETE] /api/listening-history/" + id
+                + " - Eliminando registro del historial");
+
         listeningHistoryService.delete(id);
     }
 }

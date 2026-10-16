@@ -3,9 +3,9 @@ spring:
     name: prometeo
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/prometeo
+    url: jdbc:postgresql://localhost:5432/Prometeo
     username: postgres
-    password: Drakotako147258369#
+    password: drakotako1234
     driver-class-name: org.postgresql.Driver
 
   jpa:

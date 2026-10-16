@@ -18,6 +18,8 @@ public class AppUserController {
 
     @GetMapping
     public List<AppUser> getUsers() {
+        System.out.println("[GET] /api/users - Consultando todos los usuarios");
+
         return appUserService.findAll();
     }
 
@@ -25,6 +27,9 @@ public class AppUserController {
     public AppUser getUser(
             @PathVariable String username
     ) {
+        System.out.println("[GET] /api/users/" + username
+                + " - Buscando usuario");
+
         return appUserService.findByUsername(username);
     }
 
@@ -32,6 +37,8 @@ public class AppUserController {
     public AppUser createUser(
             @RequestBody AppUser user
     ) {
+        System.out.println("[POST] /api/users - Creando usuario: " + user);
+
         return appUserService.save(user);
     }
 
@@ -39,6 +46,9 @@ public class AppUserController {
     public void deleteUser(
             @PathVariable String username
     ) {
+        System.out.println("[DELETE] /api/users/" + username
+                + " - Eliminando usuario");
+
         appUserService.delete(username);
     }
 }

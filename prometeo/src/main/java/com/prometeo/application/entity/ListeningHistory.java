@@ -1,5 +1,6 @@
 package com.prometeo.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class ListeningHistory {
     @Column(name = "history_id")
     private Long historyId;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
             name = "username",
@@ -25,6 +27,7 @@ public class ListeningHistory {
     )
     private AppUser user;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumns({
             @JoinColumn(
